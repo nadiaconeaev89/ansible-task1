@@ -1,0 +1,30 @@
+- hosts: centos1
+  tasks:
+    - name: Disable SELinux
+      selinux:
+        state: disabled
+    - name: SELinux permissive
+      selinux:
+        policy: targeted
+        state: permissive  
+    - name: Install Apache
+      yum:
+        name: httpd
+        state: latest 
+    - name: Start Apache
+      service:
+        name: httpd
+        state: started
+    - name: Enable httpd
+      service: 
+        name: httpd
+        enabled: yes     
+    - name: Download URL
+      get_url:
+        url: https://www.free-css.com/free-css-templates/page293/vertex
+        dest: /tmp/ 
+    - name: Unarchive URL
+      unarchive:
+        src: vertex
+        dest: var/www/html
+        remote_src: yes          
