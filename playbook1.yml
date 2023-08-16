@@ -23,8 +23,23 @@
       get_url:
         url: https://www.free-css.com/assets/files/free-css-templates/download/page293/vertex.zip
         dest: /tmp/ 
-    - name: Unarchive URL
+    - name: Install Unzip
+      yum:
+        name: unzip
+        state: latest
+    - name: Unarchive a file that is already on the remote machine
       unarchive:
-        src: vertex.zip
-        dest: var/www/html
-        remote_src: yes          
+        src: /tmp/vertex.zip
+        dest: /var/www/html
+        remote_src: yes
+    - name: Move Template Files
+      shell: mv /var/www/html/2124_vertex/* /var/www/html/
+      args:
+        creates: /var/www/html/index.html 
+    - name: Recursively change ownership of a directory
+      file:
+        path: /var/www/html
+        state: directory
+        recurse: yes
+        owner: apache
+        group: apache
