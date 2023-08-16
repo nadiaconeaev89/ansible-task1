@@ -21,10 +21,10 @@
         enabled: yes     
     - name: Download URL
       get_url:
-        url: https://www.free-css.com/free-css-templates/page293/vertex
+        url: https://www.free-css.com/assets/files/free-css-templates/download/page293/vertex.zip
         dest: /tmp/ 
     - name: Unarchive URL
       unarchive:
-        src: vertex
+        src: vertex.zip
         dest: var/www/html
         remote_src: yes          
